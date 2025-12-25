@@ -43,7 +43,7 @@ const Main = () => {
   return (
     <div>
         <header className="header">
-        <h1>ToDo List!</h1>
+        <h1>ToDo List</h1>
       </header>
       <main>
         <input type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)}/>
