@@ -1,5 +1,6 @@
 import { useState } from "react"
 import styles from './index.module.css'
+import { Button } from "../Button/Button"
 
 interface Task {
   id: string,
@@ -15,6 +16,9 @@ const Main = () => {
   
 
   const addToTask = () => {
+    if(!taskText) {
+      return
+    }
     setTodos((prev) => [...prev, {
       id: Date.now().toString(),
       text: taskText,
@@ -48,7 +52,7 @@ const Main = () => {
       </header>
       <main className={styles.complex}>
         <input type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)}/>
-        <button onClick={addToTask}>Добавить</button>
+        <Button text="Добавить" onClick={addToTask} />
       </main>
       {todos.length ? todos.map(({id, text, isCompleted}) => (
         <div className={styles.todoBlock} key={id}>
@@ -56,7 +60,7 @@ const Main = () => {
             <h2 className={`${isCompleted ? styles.done : ''}`} >{text}</h2>
             <input type="checkbox" checked={isCompleted} onChange={() => toggleCompleted(id)}/>
           </div>
-          <button onClick={() => removeTask(id)}>удалить</button>
+          <Button text="Удалить" onClick={() => removeTask(id)}/>
         </div>
       )) : <h3>Список дел пуст.</h3>}
     </div>
