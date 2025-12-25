@@ -1,4 +1,8 @@
-import { JsonCom } from "./components/jsonCom/jsonCom"
+import { Route, Routes } from "react-router-dom"
+import { PagesOne } from "./pages/PagesOne/PagesOne"
+import { PagesTwo } from "./pages/PagesTwo/PagesTwo"
+import { Header } from "./components/Header/Header"
+
 
 
 
@@ -8,8 +12,12 @@ function App() {
   
 
   return (
-    <div>
-      <JsonCom />
+    <div className="container">
+      <Header />
+      <Routes>
+        <Route path="/" element={<PagesOne />}/>
+        <Route path="/list" element={<PagesTwo />}/>
+      </Routes>
     </div>
   )
 }

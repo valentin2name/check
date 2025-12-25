@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react"
+import styles from './index.module.css'
+import { Button } from './../Button/Button';
 
-export const JsonCom = () => {
+interface Posts {
+    id: number,
+    title: string
+}
 
-    const [posts, setPosts] = useState([])
+interface Comments {
+    id: number,
+    name: string
+}
+
+export const PostsAndComments = () => {
+
+    const [posts, setPosts] = useState<Posts[]>([])
     const [loading, setLoading] = useState(false)
     const [activePostId, setActivePostId] = useState(null)
-    const [postComments, setPostComments] = useState([])
+    const [postComments, setPostComments] = useState<Comments[]>([])
 
     const handleClick = (id) => {
         setActivePostId(id)
@@ -36,22 +48,24 @@ export const JsonCom = () => {
 
   return (
     <div>
-        {loading && <h1>Loading...</h1>}
-        <div>
+        <div className={styles.wrapper}>
             <h1>{postComments.length ? 'Comments' : 'Posts'}</h1>
-            {postComments.length ? <button onClick={() => setPostComments([])}>Назад</button> : null}
+            {loading && <h3>Loading...</h3>}
             {postComments.length ? postComments.map(comment => (
-            <div key={comment.id}>
+            <div key={comment.id} className={styles.commentBlock}>
                 {comment.name}
             </div>
         )) : posts.map(post => (
-            <div key={post.id} style={{border: '1px solid', margin: 30, cursor: 'pointer'}} onClick={() => {
+            <div key={post.id} className={styles.postBlock} onClick={() => {
                 if(loading) return
                 handleClick(post.id)
             }}>
                 <p>{post.title}</p>
             </div>
         ))}
+        </div>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '20px 0'}}>
+            {postComments.length ? <Button text="Назад" onClick={() => setPostComments([])}/> : null}
         </div>
     </div>
   )
