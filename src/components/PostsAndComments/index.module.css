@@ -1,0 +1,29 @@
+.wrapper {
+    padding: 15px 0;
+}
+
+h1, h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.postBlock, .commentBlock {
+    display: flex;
+    margin: 25px auto;
+    width: 60%;
+    padding: 12px 24px;
+    border-radius: 9px;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.postBlock:hover,
+.commentBlock:hover {
+    background: skyblue;
+    transition: 0.5s ease;
+}
+
+/* .commentBlock {
+
+} */

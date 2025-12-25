@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import styles from './index.module.css'
 
-export const JsonCom = () => {
+export const PostsAndComments = () => {
 
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(false)
@@ -36,16 +37,16 @@ export const JsonCom = () => {
 
   return (
     <div>
-        {loading && <h1>Loading...</h1>}
-        <div>
+        <div className={styles.wrapper}>
             <h1>{postComments.length ? 'Comments' : 'Posts'}</h1>
+            {loading && <h3>Loading...</h3>}
             {postComments.length ? <button onClick={() => setPostComments([])}>Назад</button> : null}
             {postComments.length ? postComments.map(comment => (
-            <div key={comment.id}>
+            <div key={comment.id} className={styles.commentBlock}>
                 {comment.name}
             </div>
         )) : posts.map(post => (
-            <div key={post.id} style={{border: '1px solid', margin: 30, cursor: 'pointer'}} onClick={() => {
+            <div key={post.id} className={styles.postBlock} onClick={() => {
                 if(loading) return
                 handleClick(post.id)
             }}>

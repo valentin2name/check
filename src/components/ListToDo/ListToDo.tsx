@@ -1,4 +1,5 @@
 import { useState } from "react"
+import styles from './index.module.css'
 
 interface Task {
   id: string,
@@ -9,7 +10,7 @@ interface Task {
 
 const Main = () => {
 
-    const [taskText, setTaskText] = useState('')
+  const [taskText, setTaskText] = useState('')
   const [todos, setTodos] = useState<Task[]>([])
   
 
@@ -42,21 +43,22 @@ const Main = () => {
 
   return (
     <div>
-        <header className="header">
+      <header>
         <h1>ToDo List</h1>
       </header>
-      <main>
+      <main className={styles.complex}>
         <input type="text" value={taskText} onChange={(e) => setTaskText(e.target.value)}/>
         <button onClick={addToTask}>Добавить</button>
       </main>
-      <h3>{taskText}</h3>
-      {todos.map(({id, text, isCompleted}) => (
-        <div key={id}>
-          <h2>{text}</h2>
-          <input type="checkbox" checked={isCompleted} onChange={() => toggleCompleted(id)}/>
+      {todos.length ? todos.map(({id, text, isCompleted}) => (
+        <div className={styles.todoBlock} key={id}>
+          <div style={{display: 'flex', alignItems: 'center', columnGap: 12}}>
+            <h2 className={`${isCompleted ? styles.done : ''}`} >{text}</h2>
+            <input type="checkbox" checked={isCompleted} onChange={() => toggleCompleted(id)}/>
+          </div>
           <button onClick={() => removeTask(id)}>удалить</button>
         </div>
-      ))}
+      )) : <h3>Список дел пуст.</h3>}
     </div>
   )
 }
