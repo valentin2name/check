@@ -36,7 +36,7 @@ export const JsonCom = () => {
 
   return (
     <div>
-        {loading && <h1>Loading..</h1>}
+        {loading && <h1>Loading...</h1>}
         <div>
             <h1>{postComments.length ? 'Comments' : 'Posts'}</h1>
             {postComments.length ? <button onClick={() => setPostComments([])}>Назад</button> : null}
